@@ -1,0 +1,19 @@
+Microservices:
+(1)Explain security at microservice level(What is token refresh in securty and where you will store the request)
+(2)All Design pattrens in microservice architecture.
+(3)Do We required to validation at api gateway or else we can do anywhere for security?
+(4)How do you handle common business logic in microservices architecture?
+(5)How request reaches to particular micoservices?
+(6)How do you handle race conditions for multiple jvm instances in microservices architecture?
+(7)What is feign client and Why do u used only feign client in microservices architecture
+(8)Where do you used kafka in microservices architecture
+(9)How do you implement retry rate limiting and fallback logic in your architecture
+(10)How do you submit request from feign clinet and how do you validate response from microservice.
+(11)How do you deal with network glitches in microservices architecture?
+(12)Role of zookeeper in ms architecture?
+(13)Challenges in ms architecture?
+(14)Challenges When converting from monolihis to ms
+
+Kafka Interview:
+(1)Partition
+(2)How kafka ensures there wont be a duplicates message reaches consumer?

@@ -1,0 +1,114 @@
+Spring Cloud Config  	   		: Centralized configuration management using Git or other backends
+Eureka Discovery	 	   		: Service registry for locating microservices
+Spring Cloud Gateway 	   		: Intelligent routing and filtering of requests
+Spring Cloud LoadBalancer  		: Client-side load balancing across service instances
+Spring Cloud Bus				: Propagates config changes across services via messaging (e.g., Kafka)
+Spring Cloud Sleuth + Zipkin	: Distributed tracing and monitoring
+
+xml(Maven)
+<!-- Config Server -->
+<dependency>
+  <groupId>org.springframework.cloud</groupId>
+  <artifactId>spring-cloud-config-server</artifactId>
+</dependency>
+
+<!-- Config Client -->
+<dependency>
+  <groupId>org.springframework.cloud</groupId>
+  <artifactId>spring-cloud-starter-config</artifactId>
+</dependency>
+
+<!-- Eureka Server -->
+<dependency>
+  <groupId>org.springframework.cloud</groupId>
+  <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+</dependency>
+
+<!-- Eureka Client -->
+<dependency>
+  <groupId>org.springframework.cloud</groupId>
+  <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+</dependency>
+
+<!-- Gateway -->
+<dependency>
+  <groupId>org.springframework.cloud</groupId>
+  <artifactId>spring-cloud-starter-gateway</artifactId>
+</dependency>
+
+<!-- Load Balancer -->
+<dependency>
+  <groupId>org.springframework.cloud</groupId>
+  <artifactId>spring-cloud-starter-loadbalancer</artifactId>
+</dependency>
+
+
+Spring cloud config:
+<dependency>
+  <groupId>org.springframework.cloud</groupId>
+  <artifactId>spring-cloud-config-server</artifactId>
+</dependency>
+Also include the Spring Cloud BOM for version management:Also include the Spring Cloud BOM for version management:
+<dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-dependencies</artifactId>
+      <version>2022.0.3</version> <!-- Use latest stable version -->
+      <type>pom</type>
+      <scope>import</scope>
+    </dependency>
+  </dependencies>
+</dependencyManagement>
+
+Main CLass Startup:
+@SpringBootApplication
+@EnableConfigServer
+public class ConfigServerApplication {
+    public static void main(String[] args) {
+        SpringApplication.run(ConfigServerApplication.class, args);
+    }
+}
+ server:
+ port: 8888
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/your-org/config-repo
+          clone-on-start: true
+          default-label: main
+		  
+config-repo/
+├── product-service.yml
+├── order-service.yml
+├── application.yml
+
+Absolutely, Vijaykumar! Here's a full setup for a Spring Cloud Config Client that fetches configuration from your Config Server. 
+This will help your microservices stay lean and centrally managed
+spring:
+  application:
+    name: product-service
+  config:
+    import: optional:configserver:http://localhost:8888
+	
+	<dependency>
+  <groupId>org.springframework.cloud</groupId>
+  <artifactId>spring-cloud-starter-config</artifactId>
+</dependency>
+
+user:
+  role: Admin
+welcome:
+  message: Welcome to the Spring Cloud Config managed application!
+
+You can access these in your client like:
+
+3. Eureka Server
+Annotate with @EnableEurekaServer
+
+Configure port and hostname

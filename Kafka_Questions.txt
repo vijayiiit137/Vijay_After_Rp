@@ -1,0 +1,29 @@
+What is Apache Kafka and how does it differ from traditional message queues?
+What are Kafka’s key components? (Producer, Consumer, Broker, Topic, Partition, ZooKeeper)
+What is a Kafka topic and how are partitions used for scalability?
+How does Kafka ensure fault tolerance and high availability?
+What is an In-Sync Replica (ISR) and why is it important?
+Explain Kafka’s log-based storage model.
+What is the role of ZooKeeper in Kafka?
+How does Kafka handle message ordering and delivery guarantees?
+What are Kafka’s delivery semantics: at-most-once, at-least-once, exactly-once?
+How does Kafka achieve horizontal scalability?
+How would you integrate Kafka into a monolithic backend system?
+What are common use cases for Kafka in microservices architecture?
+How do you handle schema evolution in Kafka messages?
+What is a dead letter queue and how would you implement it in Kafka?
+How would you design a retry mechanism for failed Kafka operations?
+How do you monitor Kafka brokers and consumer lag?
+What tools do you use for Kafka observability (e.g., Prometheus, Grafana)?
+How do you handle back-pressure in Kafka Streams applications?
+What is log compaction and when would you use it?
+How do you tune Kafka for high throughput and low latency
+Design a fault-tolerant log aggregation system using Kafka.
+How would you implement a real-time analytics pipeline using Kafka Streams?
+Explain Kafka’s partition assignment strategy and how to customize it.
+How would you implement a multi-datacenter Kafka deployment with disaster recovery?
+Design a scalable event sourcing system using Kafka
+
+
+
+In Kafka, each partition within a topic is exclusively assigned to a single consumer within a consumer group, ensuring that no two consumers from the same group read from the same partition simultaneously 

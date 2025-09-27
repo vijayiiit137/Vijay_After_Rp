@@ -1,0 +1,46 @@
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+
+class Course {
+    String subject1;
+    String subject2;
+    String subject3;
+    Course(String subject1,String subject2,String subject3) {
+        this.subject1 = subject1;
+        this.subject2 = subject2;
+        this.subject3 = subject3;
+    }
+}
+
+class Student implements Cloneable{
+    int id;
+    String name;
+    Course course;
+    Student(int id,String name,Course course) {
+        this.id = id;
+        this.name = name;
+        this.course = course;
+    }
+    protected Object clone() throws CloneNotSupportedException{
+        return super.clone();
+    }
+}
+class Main {
+    public static void main(String[] args) {
+        Course science = new Course("a","b","c");
+        Student s = new Student(10,"Vijay",science);
+        try {
+            Student s1 = (Student)s.clone();    
+        }
+        catch(CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        System.out.println(s.course.subject3);
+        s1.course.subject3 = "d";
+        System.out.println(s1.course.subject3);
+        System.out.println(s.course.subject3);
+        
+        
+        
+    }
+}

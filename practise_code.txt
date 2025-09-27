@@ -1,0 +1,101 @@
+import java.util.*;
+
+class Customer {
+    int id;
+    String name;
+
+    public Customer(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+}
+
+class Item {
+    String name;
+    double price;
+    int quantity;
+
+    public Item(String name, double price, int quantity) {
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+    }
+}
+
+public class PlaceOrderApp {
+    static Map<Integer, Customer> customers = new HashMap<>();
+    static Map<String, Item> items = new HashMap<>();
+    static Map<Integer, Double> customerTotalMap = new HashMap<>();
+
+    static {
+        // Initialize static entity data
+        customers.put(1, new Customer(1, "Alice"));
+        customers.put(2, new Customer(2, "Bob"));
+
+        items.put("Pen", new Item("Pen", 10.0, 100));
+        items.put("Notebook", new Item("Notebook", 50.0, 50));
+        items.put("Pencil", new Item("Pencil", 5.0, 200));
+    }
+
+    public static void main(String[] args) {
+        int i = 0;
+        while (i < args.length) {
+            String command = args[i].toLowerCase();
+
+            try {
+                switch (command) {
+                    case "placeorder":
+                        int custId = Integer.parseInt(args[i + 1]);
+                        String itemName = args[i + 2];
+                        int qty = Integer.parseInt(args[i + 3]);
+                        placeOrder(custId, itemName, qty);
+                        i += 4;
+                        break;
+
+                    case "totalcost":
+                        int id = Integer.parseInt(args[i + 1]);
+                        printTotalCost(id);
+                        i += 2;
+                        break;
+
+                    default:
+                        System.out.println("Unknown command: " + command);
+                        i++;
+                }
+            } catch (Exception e) {
+                System.out.println("Error: " + e.getMessage());
+                i++; // Skip to next command to avoid infinite loop
+            }
+        }
+    }
+
+    static void placeOrder(int custId, String itemName, int qty) {
+        if (!customers.containsKey(custId)) {
+            throw new RuntimeException("No such customer ID: " + custId);
+        }
+
+        if (!items.containsKey(itemName)) {
+            throw new RuntimeException("Item not found: " + itemName);
+        }
+
+        Item item = items.get(itemName);
+        if (item.quantity < qty) {
+            throw new RuntimeException("Insufficient stock for item: " + itemName);
+        }
+
+        double cost = item.price * qty;
+        item.quantity -= qty;
+
+        customerTotalMap.put(custId, customerTotalMap.getOrDefault(custId, 0.0) + cost);
+        System.out.println("Order placed successfully for customer " + custId);
+    }
+
+    static void printTotalCost(int custId) {
+        if (!customers.containsKey(custId)) {
+            throw new RuntimeException("No such customer ID: " + custId);
+        }
+
+        double total = customerTotalMap.getOrDefault(custId, 0.0);
+        System.out.println("Total cost for customer " + custId + ": ₹" + total);
+    }
+}

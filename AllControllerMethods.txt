@@ -1,0 +1,42 @@
+@Autowired
+private RestTemplate restTemplate;
+
+public void callEndpoints() {
+    String hello = restTemplate.getForObject("http://localhost:8080/api/hello", String.class);
+    String user = restTemplate.getForObject("http://localhost:8080/api/user/101", String.class);
+    String search = restTemplate.getForObject("http://localhost:8080/api/search?keyword=Spring", String.class);
+    String home = restTemplate.getForObject("http://localhost:8080/api/home", String.class);
+
+    System.out.println(hello);
+    System.out.println(user);
+    System.out.println(search);
+    System.out.println(home);
+}
+
+
+
+
+@RestController
+@RequestMapping("/api")
+public class DemoController {
+
+    @GetMapping("/hello")
+    public String hello() {
+        return "Hello Jytosna!";
+    }
+
+    @GetMapping("/user/{id}")
+    public String getUser(@PathVariable int id) {
+        return "User ID: " + id;
+    }
+
+    @GetMapping("/search")
+    public String search(@RequestParam String keyword) {
+        return "Search result for: " + keyword;
+    }
+
+    @GetMapping({"/home", "/index"})
+    public String home() {
+        return "Welcome Home!";
+    }
+}
